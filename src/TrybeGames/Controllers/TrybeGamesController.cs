@@ -121,9 +121,11 @@ public class TrybeGamesController
     {
         this.Console.WriteLine("Digite o nome da pessoa jogadora:");
         var playerName = this.Console.ReadLine();
-        var player = new Player();
-        player.Name = playerName;
-        player.Id = database.Players.Count +1;
+        var player = new Player
+        {
+            Name = playerName,
+            Id = database.Players.Count + 1
+        };
         database.Players.Add(player);
     }
 
@@ -131,17 +133,30 @@ public class TrybeGamesController
     {
         this.Console.WriteLine("Digite o nome do estúdio de jogos:");
         var gameStudioName = this.Console.ReadLine();
-        var gameStudio = new GameStudio();
-        gameStudio.Name = gameStudioName;
-        gameStudio.Id = database.GameStudios.Count +1;
+        var gameStudio = new GameStudio
+        {
+            Name = gameStudioName,
+            Id = database.GameStudios.Count + 1
+        };
         database.GameStudios.Add(gameStudio);
     }
 
-    // 3. Crie a funcionalidade de adicionar novo Jogo ao Banco de dados
     public void AddGame()
     {
-        // implementar
-        Console.WriteLine("Ainda não é possível realizar essa funcionalidade!");
+        this.Console.WriteLine("Digite o nome do jogo:");
+        var gameName = this.Console.ReadLine();
+        this.Console.WriteLine("Digite a data de lançamento do jogo:");
+        var gameReleaseDate = DateTime.ParseExact(this.Console.ReadLine(), "dd/MM/yyyy", CultureInfo.InvariantCulture);
+        this.Console.WriteLine("Digite o tipo do jogo:");
+        var gameType = int.Parse(this.Console.ReadLine() ?? "0");
+        var game = new Game
+        {
+            Name = gameName,
+            ReleaseDate = gameReleaseDate,
+            GameType = (GameType)gameType,
+            Id = database.Games.Count + 1
+        };
+        database.Games.Add(game);
     }
 
     public void ChangeGameStudio(Game game)

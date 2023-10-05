@@ -15,11 +15,11 @@ public class TrybeGamesDatabase
                select game).ToList();
     }
 
-    // 5. Crie a funcionalidade de buscar jogos jogados por uma pessoa jogadora
     public List<Game> GetGamesPlayedBy(Player player)
     {
-        // Implementar
-        throw new NotImplementedException();  
+        return (from game in Games
+               where game.Players.Contains(player.Id)
+               select game).ToList();
     }
 
     // 6. Crie a funcionalidade de buscar jogos comprados por uma pessoa jogadora
